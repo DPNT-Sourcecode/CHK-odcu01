@@ -100,10 +100,13 @@ def apply_inter_item_promotions(
 
 
 def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, int]) -> int:
-    pass
+    for promo in promotions:
+        group_items_n = sum([qty for item, qty in counter.items() if item in promo.items])
+        discount_n = floor(group_items_n / promo.qty)
+        
 
 
-def checkout_items(counter: Dict[str, int]) -> int:
+def checkout_items(price_table: Dict[str, Item], counter: Dict[str, int]) -> int:
     prices = []
     for sku, qty in counter.items():
         item = PRICE_TABLE[sku]
@@ -126,7 +129,8 @@ def checkout(skus: str) -> int:
 
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
-    return checkout_items(counter)
+    return checkout_items(PRICE_TABLE, counter)
+
 
 
 
