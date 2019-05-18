@@ -1,14 +1,10 @@
 from typing import Dict
 
-from lib.solutions.CHK.checkout_solution import (
-    InterItemPromotion,
-    Item,
-    Offer,
-    apply_inter_item_promotions,
-    checkout,
-    GroupPromotion,
-    apply_group_promotions,
-)
+from lib.solutions.CHK.checkout_solution import (GroupPromotion,
+                                                 InterItemPromotion, Item,
+                                                 Offer, apply_group_promotions,
+                                                 apply_inter_item_promotions,
+                                                 checkout)
 
 
 class TestItem:
@@ -127,5 +123,6 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 
 
