@@ -2,7 +2,7 @@ from typing import Dict, List, Tuple
 
 
 class Item:
-    def __init__(self, price: int, special_offer: tuple) -> None:
+    def __init__(self, price: int, special_offer: Tuple[int, int] = None) -> None:
         self.price = price
         self.special_offer = special_offer
 
@@ -10,15 +10,19 @@ class Item:
         pass
 
 
-PRICE_TABLE = {
+PRICE_TABLE: Dict[str, Item] = {
     "A": Item(50, (3, 130)),
     "B": Item(30, (2, 130)),
-    "C": Item(20, ()),
-    "D": Item(15, ()),
+    "C": Item(20),
+    "D": Item(15),
 }
 
 
-def checkout_items(counter: dict) -> int:
+class SkuNotFoundException(Exception):
+    pass
+
+
+def checkout_items(counter: Dict[str, int]) -> int:
     prices = []
     for sku, qty in counter.items():
         item = PRICE_TABLE[sku]
@@ -26,12 +30,20 @@ def checkout_items(counter: dict) -> int:
 
     return sum(prices)
 
+def count_items(skus: str) -> Dict[str, int]:
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
     if not isinstance(skus, str):
         return -1
 
+    try:
+        counter = count_items(skus)
+    except SkuNotFoundException:
+        return -1
+    
     counter = {sku: 0 for sku, _ in PRICE_TABLE.items()}
 
     for sku in skus:
@@ -39,6 +51,7 @@ def checkout(skus: str) -> int:
             return -1
         counter[sku] += 1
 
+    return
 
 
 
