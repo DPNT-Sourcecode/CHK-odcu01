@@ -86,10 +86,14 @@ class TestCheckout:
             "BBBEE": 125,
             "BBBEEE": 165,
             "BBBEEEE": 190,
+            "F": 10,
+            "FF": 20,
+            "FFF": 20,
         }
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 
 
 

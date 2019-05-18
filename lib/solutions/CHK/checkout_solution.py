@@ -29,6 +29,7 @@ PRICE_TABLE: Dict[str, Item] = {
     "C": Item([Offer(qty=1, price=20)]),
     "D": Item([Offer(qty=1, price=15)]),
     "E": Item([Offer(qty=1, price=40)]),
+    "F": Item([Offer(qty=1, price=10)]),
 }
 
 
@@ -40,7 +41,8 @@ class InterItemPromotion(NamedTuple):
 
 
 INTER_ITEM_PROMOTIONS: List[InterItemPromotion] = [
-    InterItemPromotion(src_item="E", src_qty=2, dest_item="B", dest_qty=-1)
+    InterItemPromotion(src_item="E", src_qty=2, dest_item="B", dest_qty=-1),
+    InterItemPromotion(src_item="F", src_qty=3, dest_item="F", dest_qty=-1)
 ]
 
 
@@ -60,7 +62,7 @@ def count_items(skus: str) -> Dict[str, int]:
 
 
 def apply_inter_item_promotions(
-    promotions: List[InterItemPromotion], counter: Dict[str, int]
+        promotions: List[InterItemPromotion], counter: Dict[str, int]
 ) -> None:
     for promo in promotions:
         n = floor(counter[promo.src_item] / promo.src_qty)
@@ -93,5 +95,6 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
 
 
