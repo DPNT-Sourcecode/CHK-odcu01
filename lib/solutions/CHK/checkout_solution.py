@@ -3,8 +3,8 @@ from math import floor
 
 
 class Offer(NamedTuple):
-    price: int
     qty: int
+    price: int
 
 
 class Item:
@@ -22,10 +22,11 @@ class Item:
 
 
 PRICE_TABLE: Dict[str, Item] = {
-    "A": Item([Offer(3, 130), Offer(1, 50)]),
-    "B": Item([Offer(2, 45), Offer(1, 30)]),
-    "C": Item([Offer(1, 20)]),
-    "D": Item([Offer(1, 15)]),
+    "A": Item([Offer(qty=3, price=130), Offer(qty=31, price=50)]),
+    "B": Item([Offer(qty=2, price=45), Offer(qty=31, price=30)]),
+    "C": Item([Offer(qty=1, price=20)]),
+    "D": Item([Offer(qty=1, price=15)]),
+    "E": Item([Offer(qty=1, price=40)]),
 }
 
 
@@ -66,6 +67,7 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
 
 
 
