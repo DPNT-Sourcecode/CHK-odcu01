@@ -34,7 +34,7 @@ PRICE_TABLE: Dict[str, Item] = {
     "H": Item([Offer(qty=10, price=80), Offer(qty=5, price=45), Offer(qty=1, price=10)]),
     "I": Item([Offer(qty=1, price=35)]),
     "J": Item([Offer(qty=1, price=60)]),
-    "K": Item([Offer(qty=2, price=150), Offer(qty=1, price=80)]),
+    "K": Item([Offer(qty=2, price=120), Offer(qty=1, price=70)]),
     "L": Item([Offer(qty=1, price=90)]),
     "M": Item([Offer(qty=1, price=15)]),
     "N": Item([Offer(qty=1, price=40)]),
@@ -42,14 +42,14 @@ PRICE_TABLE: Dict[str, Item] = {
     "P": Item([Offer(qty=5, price=200), Offer(qty=1, price=50)]),
     "Q": Item([Offer(qty=3, price=80), Offer(qty=1, price=30)]),
     "R": Item([Offer(qty=1, price=50)]),
-    "S": Item([Offer(qty=1, price=30)]),
+    "S": Item([Offer(qty=1, price=20)]),
     "T": Item([Offer(qty=1, price=20)]),
     "U": Item([Offer(qty=1, price=40)]),
     "V": Item([Offer(qty=3, price=130), Offer(qty=2, price=90), Offer(qty=1, price=50)]),
     "W": Item([Offer(qty=1, price=20)]),
-    "X": Item([Offer(qty=1, price=90)]),
-    "Y": Item([Offer(qty=1, price=10)]),
-    "Z": Item([Offer(qty=1, price=50)]),
+    "X": Item([Offer(qty=1, price=17)]),
+    "Y": Item([Offer(qty=1, price=20)]),
+    "Z": Item([Offer(qty=1, price=21)]),
 }
 
 
@@ -118,3 +118,4 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
