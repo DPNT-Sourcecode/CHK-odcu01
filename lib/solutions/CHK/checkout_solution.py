@@ -1,6 +1,7 @@
 from typing import Dict, Tuple
 from math import floor
 
+
 class Item:
     def __init__(self, price: int, special_offer: Tuple[int, int]) -> None:
         self.price = price
@@ -38,7 +39,9 @@ def checkout_items(counter: Dict[str, int]) -> int:
     prices = []
     for sku, qty in counter.items():
         item = PRICE_TABLE[sku]
-        prices.append(item.checkout(qty))
+        price = item.checkout(qty)
+        from pprint import pprint; import ipdb; ipdb.set_trace()
+        prices.append(price)
 
     return sum(prices)
 
@@ -66,3 +69,4 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
