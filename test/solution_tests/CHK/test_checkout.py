@@ -40,18 +40,20 @@ class TestInterItemPromotions:
             InterItemPromotion(src_item="A", src_qty=2, dest_item="B", dest_qty=-1),
             InterItemPromotion(src_item="C", src_qty=1, dest_item="D", dest_qty=-1),
             InterItemPromotion(src_item="E", src_qty=1, dest_item="F", dest_qty=-1),
+            InterItemPromotion(src_item="G", src_qty=3, dest_item="G", dest_qty=-1),
         ]
 
-        counter: Dict[str, int] = {"A": 5, "B": 3, "C": 1, "D": 10, "E": 1, "F": 0}
+        counter: Dict[str, int] = {"A": 5, "B": 3, "C": 1, "D": 10, "E": 1, "F": 0, "G": 3}
         apply_inter_item_promotions(promotions, counter)
 
-        assert len(counter) == 6
+        assert len(counter) == 7
         assert counter["A"] == 5
         assert counter["B"] == 1
         assert counter["C"] == 1
         assert counter["D"] == 9
         assert counter["E"] == 1
         assert counter["F"] == 0
+        assert counter["G"] == 2
 
 
 class TestCheckout:
@@ -88,6 +90,7 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 
 
 
