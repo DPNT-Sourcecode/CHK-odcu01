@@ -7,7 +7,7 @@ class Item:
         self.special_offer = special_offer
 
     def checkout(self, qty: int) -> int:
-        return 0
+
 
 
 PRICE_TABLE: Dict[str, Item] = {
@@ -54,6 +54,7 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
 
 
 
