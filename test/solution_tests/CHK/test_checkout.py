@@ -56,7 +56,7 @@ class TestCheckout:
         invalid_inputs = (None, ["A"], 1, {"A": "A"}, "X", "ABCDX")
 
         for input_ in invalid_inputs:
-            assert checkout(input_) == -1
+            assert checkout(input_) == -1  # type: ignore
 
     def test_checkout_no_error(self) -> None:
         input_ = "ABCDE"
@@ -84,3 +84,4 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+

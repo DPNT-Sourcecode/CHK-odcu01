@@ -1,5 +1,5 @@
 from math import floor
-from typing import Dict, List, NamedTuple, Tuple
+from typing import Dict, List, NamedTuple
 
 
 class Offer(NamedTuple):
@@ -91,3 +91,4 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
