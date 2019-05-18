@@ -42,16 +42,17 @@ class TestCheckout:
 
     def test_checkout_ok(self):
             in_out = {
-                "": 0,  # not sure about this one
+                "": 0,
                 "A": 50, "AB": 80, "C": 20,
-                "AAA": 130, "AAAA": 180, "AAAAA": 200, "AAAAAA"
+                "AAA": 130, "AAAA": 180, "AAAAA": 200, "AAAAAA": 250,
                 "CCCCC": 100,
                 "DABDBC": 145,
-                "AA"
+                "BE": 70, "BEE": 80, "BBEE": 110, "BBBEE": 125, "BBBEEE": 165, "BBBEEEE": 190
             }
 
             for input_, output in in_out.items():
                 assert checkout(input_) == output, input_
+
 
 
 
