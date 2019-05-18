@@ -17,7 +17,7 @@ class TestItem:
         assert item.checkout(3) == 25
 
     def test_item_checkout_multi_discount(self):
-        item = Item(10, ((2, 15), (3, 12)))
+        item = Item(10, [(2, 15), (3, 12)])
 
         assert item.checkout(1) == 10
         assert item.checkout(2) == 15
@@ -47,15 +47,8 @@ class TestCheckout:
                 "AAA": 130, "AAAA": 180, "AAAAA": 200, "AAAAAA": 250,
                 "CCCCC": 100,
                 "DABDBC": 145,
-                "BE": 70, "BEE": 80, "BBEE": 110, "BBBEE": 125, "BBBEEE": 165, "BBBEEEE": 190
+                # "BE": 70, "BEE": 80, "BBEE": 110, "BBBEE": 125, "BBBEEE": 165, "BBBEEEE": 190
             }
 
             for input_, output in in_out.items():
                 assert checkout(input_) == output, input_
-
-
-
-
-
-
-

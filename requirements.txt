@@ -9,4 +9,3 @@ mypy
 black
 isort
 ipdb
-

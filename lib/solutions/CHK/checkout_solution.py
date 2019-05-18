@@ -2,21 +2,12 @@ from typing import Dict, List, Tuple
 from math import floor
 
 
-SpecialPriceType = List[Tuple[int, int]]
+PriceQtyPairs = List[Tuple[int, int]]
 
 
 class Item:
-    def __init__(self, price: int, special_offer: SpecialPriceType) -> None:
-        self.price = price
-        self._special_offer = special_offer
-
-    @property
-    def special_offer_qty(self) -> int:
-        return self._special_offer[0]
-
-    @property
-    def special_offer_price(self) -> int:
-        return self._special_offer[1]
+    def __init__(self, PriceQtyPairs) -> None:
+        pass
 
     def checkout(self, qty: int) -> int:
         regular_price_n = qty % self.special_offer_qty
@@ -27,10 +18,10 @@ class Item:
 
 
 PRICE_TABLE: Dict[str, Item] = {
-    "A": Item(50, (3, 130)),
-    "B": Item(30, (2, 45)),
-    "C": Item(20, (1, 20)),
-    "D": Item(15, (1, 15)),
+    "A": Item([(1, 50), (3, 130)]),
+    "B": Item([(1, 30), (2, 45)]),
+    "C": Item([(1, 20)]),
+    "D": Item([(1, 15)]),
 }
 
 
@@ -71,6 +62,3 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
-
-
-
