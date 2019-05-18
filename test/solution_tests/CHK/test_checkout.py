@@ -1,11 +1,9 @@
 from typing import Dict
-from lib.solutions.CHK.checkout_solution import (
-    InterItemPromotion,
-    Item,
-    Offer,
-    apply_inter_item_promotions,
-    checkout,
-)
+
+from lib.solutions.CHK.checkout_solution import (InterItemPromotion, Item,
+                                                 Offer,
+                                                 apply_inter_item_promotions,
+                                                 checkout)
 
 
 class TestItem:
@@ -40,12 +38,10 @@ class TestInterItemPromotions:
     def test_inter_promotions(self) -> None:
         promotions = [
             InterItemPromotion(src_item="A", src_qty=2, dest_item="B", dest_qty=-1),
-            InterItemPromotion(src_item="C", src_qty=1, dest_item="D", dest_qty=-1)
+            InterItemPromotion(src_item="C", src_qty=1, dest_item="D", dest_qty=-1),
         ]
 
-        counter: Dict[str, int] = {
-            "A": 5, "B": 3, "C": 1, "D": 10
-        }
+        counter: Dict[str, int] = {"A": 5, "B": 3, "C": 1, "D": 10}
         apply_inter_item_promotions(promotions, counter)
 
         assert len(counter) == 4
@@ -78,13 +74,13 @@ class TestCheckout:
             "AAAAAA": 250,
             "CCCCC": 100,
             "DABDBC": 145,
-            # "BE": 70, "BEE": 80, "BBEE": 110, "BBBEE": 125, "BBBEEE": 165, "BBBEEEE": 190
+            "BE": 70,
+            "BEE": 80,
+            "BBEE": 110,
+            "BBBEE": 125,
+            "BBBEEE": 165,
+            "BBBEEEE": 190,
         }
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
-
-
-
-
-

@@ -1,5 +1,5 @@
-from typing import Dict, List, Tuple, NamedTuple
 from math import floor
+from typing import Dict, List, NamedTuple, Tuple
 
 
 class Offer(NamedTuple):
@@ -22,7 +22,9 @@ class Item:
 
 
 PRICE_TABLE: Dict[str, Item] = {
-    "A": Item([Offer(qty=5, price=200), Offer(qty=3, price=130), Offer(qty=1, price=50)]),
+    "A": Item(
+        [Offer(qty=5, price=200), Offer(qty=3, price=130), Offer(qty=1, price=50)]
+    ),
     "B": Item([Offer(qty=2, price=45), Offer(qty=1, price=30)]),
     "C": Item([Offer(qty=1, price=20)]),
     "D": Item([Offer(qty=1, price=15)]),
@@ -57,9 +59,12 @@ def count_items(skus: str) -> Dict[str, int]:
     return counter
 
 
-def apply_inter_item_promotions(promotions: List[InterItemPromotion], counter: Dict[str, int]) -> None:
-    for promotion in promotions:
-        pass
+def apply_inter_item_promotions(
+    promotions: List[InterItemPromotion], counter: Dict[str, int]
+) -> None:
+    for promo in promotions:
+        n = floor(counter[promo.src_item] / promo.src_qty)
+        counter[promo.dest_item] += promo.dest_qty * n
 
 
 def checkout_items(counter: Dict[str, int]) -> int:
@@ -86,11 +91,3 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
-
-
-
-
-
-
-
-
