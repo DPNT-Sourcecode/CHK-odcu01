@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple
+from typing import Dict, Tuple
 
 
 class Item:
@@ -30,7 +30,16 @@ def checkout_items(counter: Dict[str, int]) -> int:
 
     return sum(prices)
 
+
 def count_items(skus: str) -> Dict[str, int]:
+    counter = {sku: 0 for sku, _ in PRICE_TABLE.items()}
+
+    for sku in skus:
+        if sku not in counter:
+            raise SkuNotFoundException(f"sku not found: {sku}")
+        counter[sku] += 1
+
+    return counter
 
 
 # noinspection PyUnusedLocal
@@ -43,15 +52,9 @@ def checkout(skus: str) -> int:
         counter = count_items(skus)
     except SkuNotFoundException:
         return -1
-    
-    counter = {sku: 0 for sku, _ in PRICE_TABLE.items()}
 
-    for sku in skus:
-        if sku not in counter:
-            return -1
-        counter[sku] += 1
+    return checkout_items(counter)
 
-    return
 
 
 
