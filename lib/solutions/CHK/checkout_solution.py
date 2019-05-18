@@ -10,13 +10,15 @@ class Item:
 PRICE_TABLE = {
     "A": Item(50, (3, 130)),
     "B": Item(30, (2, 130)),
-    "C": Item(20, (3, 130)),
-    "D": Item(50, (3, 130)),
+    "C": Item(20, ()),
+    "D": Item(15, ()),
 }
 
 
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+    pass
+
 
 
