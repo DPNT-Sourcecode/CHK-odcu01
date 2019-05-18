@@ -74,6 +74,11 @@ class GroupPromotion(NamedTuple):
     qty: int
 
 
+GROUP_PROMOTIONS: List[GroupPromotion] = [
+
+]
+
+
 class SkuNotFoundException(Exception):
     pass
 
@@ -99,7 +104,7 @@ def apply_inter_item_promotions(
             counter[promo.dest_item] = 0
 
 
-def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, int]) -> int:
+def apply_group_promotions(price_table: Dict[str, Item], promotions: List[GroupPromotion], counter: Dict[str, int]) -> int:
     for promo in promotions:
         group_items_n = sum([qty for item, qty in counter.items() if item in promo.items])
         discount_n = floor(group_items_n / promo.qty)
@@ -107,8 +112,11 @@ def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, 
         group_price = 0
         group_n = 0
         for item in promo.items:
-
-
+            if group_n != discount_n:
+                while counter[item] > 0:
+                    counter[item] -= 1
+                    group_n += 1
+                    group_price += PRICE_TABLE
 
 
 def checkout_items(price_table: Dict[str, Item], counter: Dict[str, int]) -> int:
@@ -134,7 +142,10 @@ def checkout(skus: str) -> int:
 
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
+    apply_group_promotions(PRICE_TABLE, GROUP_PROMOTIONS, counter)
+
     return checkout_items(PRICE_TABLE, counter)
+
 
 
 
