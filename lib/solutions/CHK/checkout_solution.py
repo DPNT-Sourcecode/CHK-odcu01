@@ -46,16 +46,6 @@ class SkuNotFoundException(Exception):
     pass
 
 
-def checkout_items(counter: Dict[str, int]) -> int:
-    prices = []
-    for sku, qty in counter.items():
-        item = PRICE_TABLE[sku]
-        price = item.checkout(qty)
-        prices.append(price)
-
-    return sum(prices)
-
-
 def count_items(skus: str) -> Dict[str, int]:
     counter = {sku: 0 for sku, _ in PRICE_TABLE.items()}
 
@@ -65,6 +55,21 @@ def count_items(skus: str) -> Dict[str, int]:
         counter[sku] += 1
 
     return counter
+
+
+def apply_inter_item_promotions(counter: Dict[str, int]) -> None:
+    for promotion in INTER_ITEM_PROMOTIONS:
+        pass
+
+
+def checkout_items(counter: Dict[str, int]) -> int:
+    prices = []
+    for sku, qty in counter.items():
+        item = PRICE_TABLE[sku]
+        price = item.checkout(qty)
+        prices.append(price)
+
+    return sum(prices)
 
 
 # noinspection PyUnusedLocal
@@ -78,7 +83,10 @@ def checkout(skus: str) -> int:
     except SkuNotFoundException:
         return -1
 
+    apply_inter_item_promotions(counter)
+
     return checkout_items(counter)
+
 
 
 

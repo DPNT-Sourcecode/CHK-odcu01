@@ -30,6 +30,11 @@ class TestItem:
         assert item.checkout(6) == 24
 
 
+class TestInterItemPromotions:
+    def test_inter_promotions(self):
+        apply_inter_item_promotions
+
+
 class TestCheckout:
     def test_checkout_error(self):
         invalid_inputs = (
@@ -55,5 +60,6 @@ class TestCheckout:
 
             for input_, output in in_out.items():
                 assert checkout(input_) == output, input_
+
 
 
