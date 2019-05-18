@@ -99,7 +99,7 @@ def apply_inter_item_promotions(
             counter[promo.dest_item] = 0
 
 
-def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, int])
+def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, int]) -> int:
     pass
 
 def checkout_items(counter: Dict[str, int]) -> int:
@@ -126,6 +126,7 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
 
 
 

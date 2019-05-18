@@ -3,7 +3,9 @@ from typing import Dict
 from lib.solutions.CHK.checkout_solution import (InterItemPromotion, Item,
                                                  Offer,
                                                  apply_inter_item_promotions,
-                                                 checkout)
+                                                 checkout,
+                                                 GroupPromotion,
+                                                 apply_group_promotions)
 
 
 class TestItem:
@@ -61,14 +63,16 @@ class TestGroupPromotions:
         price_table: Dict[str, Item] = {
             "a": Item([Offer(qty=1, price=20)]),
             "b": Item([Offer(qty=1, price=21)]),
-            "c": Item([Offer(qty=1, price=19)]),
-            "d": Item([Offer(qty=1, price=15)]),
+            "c": Item([Offer(qty=1, price=15)]),
+            "d": Item([Offer(qty=1, price=16)]),
         }
         promotions = [
-
+            GroupPromotion(items=["b", "d", "c"], qty=4)
         ]
 
-    counter: Dict[str, int] = {"A": 2, "B": 3, "C": 1, "D": 10, "E": 1, "F": 0, "G": 3}
+        counter: Dict[str, int] = {"a": 2, "b": 3, "c": 1, "d": 10}
+        group_price = apply_group_promotions(promotions, counter)
+        assert group_price == (3 * 21 + 1 * 16) +
 
 
 class TestCheckout:
@@ -108,5 +112,6 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 
 
