@@ -1,4 +1,4 @@
-from lib.solutions.CHK.checkout_solution import checkout
+from lib.solutions.CHK.checkout_solution import checkout, Item
 
 
 class TestCheckout:
@@ -9,6 +9,19 @@ class TestCheckout:
 
         for input_ in invalid_inputs:
             assert checkout(input_) == -1
+
+    def test_item_checkout(self):
+        item = Item(10, (2, 15))
+
+        assert item.checkout(1) == 10
+        assert item.checkout(2) == 15
+        assert item.checkout(3) == 25
+
+        item = Item(10, (1, 10))
+
+        assert item.checkout(1) == 10
+        assert item.checkout(2) == 20
+        assert item.checkout(3) == 30
 
     def test_checkout_ok(self):
         # well i am assuming that the input will be something like:
@@ -23,4 +36,3 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
-
