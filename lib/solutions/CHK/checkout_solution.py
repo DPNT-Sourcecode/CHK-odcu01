@@ -21,9 +21,14 @@ class Item:
         return price
 
 
+class InterItemPromotion(NamedTuple):
+    
+
+
+
 PRICE_TABLE: Dict[str, Item] = {
-    "A": Item([Offer(qty=3, price=130), Offer(qty=31, price=50)]),
-    "B": Item([Offer(qty=2, price=45), Offer(qty=31, price=30)]),
+    "A": Item([Offer(qty=5, price=200), Offer(qty=3, price=130), Offer(qty=1, price=50)]),
+    "B": Item([Offer(qty=2, price=45), Offer(qty=1, price=30)]),
     "C": Item([Offer(qty=1, price=20)]),
     "D": Item([Offer(qty=1, price=15)]),
     "E": Item([Offer(qty=1, price=40)]),
@@ -67,6 +72,7 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
 
 
 
