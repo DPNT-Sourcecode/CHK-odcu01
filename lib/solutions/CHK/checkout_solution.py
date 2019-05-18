@@ -2,33 +2,30 @@ from typing import Dict, List, Tuple, NamedTuple
 from math import floor
 
 
-class PriceQty(NamedTuple):
+class Offer(NamedTuple):
     price: int
     qty: int
 
 
-PriceQtyPairs = List[PriceQty]
-
-
 class Item:
-    def __init__(self, price_qty_list: PriceQtyPairs) -> None:
-        self.price_qty_list = price_qty_list
+    def __init__(self, offers: List[Offer]) -> None:
+        self.offers = offers
 
     def checkout(self, qty: int) -> int:
         price = 0
-        for price_qty in self.price_qty_list:
-            discount_price_n = floor(qty / price.qty)
-            qty = qty % self.special_offer_qty
+        for offer in self.offers:
+            n = floor(qty / offer.qty)
+            qty = qty % offer.qty
+            price += n * offer.price
 
-        return (self.price * regular_price_n) + \
-               (self.special_offer_price * discount_price_n)
+        return price
 
 
 PRICE_TABLE: Dict[str, Item] = {
-    "A": Item([PriceQty(3, 130), PriceQty(1, 50)]),
-    "B": Item([PriceQty(2, 45), PriceQty(1, 30)]),
-    "C": Item([PriceQty(1, 20)]),
-    "D": Item([PriceQty(1, 15)]),
+    "A": Item([Offer(3, 130), Offer(1, 50)]),
+    "B": Item([Offer(2, 45), Offer(1, 30)]),
+    "C": Item([Offer(1, 20)]),
+    "D": Item([Offer(1, 15)]),
 }
 
 
@@ -69,5 +66,6 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
 
 
