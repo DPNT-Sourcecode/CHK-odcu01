@@ -50,7 +50,6 @@ PRICE_TABLE: Dict[str, Item] = {
     "X": Item([Offer(qty=1, price=90)]),
     "Y": Item([Offer(qty=1, price=10)]),
     "Z": Item([Offer(qty=1, price=50)]),
-
 }
 
 
@@ -119,6 +118,7 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
 
 
 
