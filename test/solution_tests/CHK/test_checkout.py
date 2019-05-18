@@ -56,6 +56,14 @@ class TestInterItemPromotions:
         assert counter["G"] == 2
 
 
+class TestGroupPromotions:
+    def test_group_promotions(self):
+        promotions = []
+
+        counter: Dict[str, int] = {"A": 5, "B": 3, "C": 1, "D": 10, "E": 1, "F": 0, "G": 3}
+        
+
+
 class TestCheckout:
     def test_checkout_error(self) -> None:
         invalid_inputs = (None, ["A"], 1, {"A": "A"}, "a")
@@ -93,3 +101,4 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+

@@ -69,6 +69,10 @@ INTER_ITEM_PROMOTIONS: List[InterItemPromotion] = [
 ]
 
 
+class GroupPromotion:
+    pass
+
+
 class SkuNotFoundException(Exception):
     pass
 
@@ -118,4 +122,5 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
 
