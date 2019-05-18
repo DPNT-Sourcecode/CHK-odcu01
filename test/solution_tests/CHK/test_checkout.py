@@ -36,17 +36,23 @@ class TestCheckout:
         for input_ in invalid_inputs:
             assert checkout(input_) == -1
 
-def test_checkout_ok(self):
-        in_out = {
-            "": 0,  # not sure about this one
-            "A": 50, "AB": 80, "C": 20,
-            "CCCCC": 100, "AAA": 130, "AAAA": 180,
-            "DABDBC": 145,
+    def test_checkout_no_error(self):
+        input_ = "ABCDE"
+        assert checkout(input_) > 0
 
-        }
+    def test_checkout_ok(self):
+            in_out = {
+                "": 0,  # not sure about this one
+                "A": 50, "AB": 80, "C": 20,
+                "AAA": 130, "AAAA": 180, "AAAAA": 200, "AAAAAA"
+                "CCCCC": 100,
+                "DABDBC": 145,
+                "AA"
+            }
 
-        for input_, output in in_out.items():
-            assert checkout(input_) == output, input_
+            for input_, output in in_out.items():
+                assert checkout(input_) == output, input_
+
 
 
 
