@@ -58,7 +58,8 @@ class TestInterItemPromotions:
 
 class TestCheckout:
     def test_checkout_error(self) -> None:
-        invalid_inputs = (None, ["A"], 1, {"A": "A"}, "X", "ABCDX")
+        invalid_inputs = (
+            None, ["A"], 1, {"A": "A"}, "a")
 
         for input_ in invalid_inputs:
             assert checkout(input_) == -1  # type: ignore
@@ -93,3 +94,4 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+

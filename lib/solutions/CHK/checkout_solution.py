@@ -30,6 +30,27 @@ PRICE_TABLE: Dict[str, Item] = {
     "D": Item([Offer(qty=1, price=15)]),
     "E": Item([Offer(qty=1, price=40)]),
     "F": Item([Offer(qty=1, price=10)]),
+    "G": Item([Offer(qty=1, price=20)]),
+    "H": Item([Offer(qty=1, price=10)]),
+    "I": Item([Offer(qty=1, price=10)]),
+    "J": Item([Offer(qty=1, price=10)]),
+    "K": Item([Offer(qty=1, price=10)]),
+    "L": Item([Offer(qty=1, price=10)]),
+    "M": Item([Offer(qty=1, price=10)]),
+    "N": Item([Offer(qty=1, price=10)]),
+    "O": Item([Offer(qty=1, price=10)]),
+    "P": Item([Offer(qty=1, price=10)]),
+    "Q": Item([Offer(qty=1, price=10)]),
+    "R": Item([Offer(qty=1, price=10)]),
+    "S": Item([Offer(qty=1, price=10)]),
+    "T": Item([Offer(qty=1, price=10)]),
+    "U": Item([Offer(qty=1, price=10)]),
+    "V": Item([Offer(qty=1, price=10)]),
+    "W": Item([Offer(qty=1, price=10)]),
+    "X": Item([Offer(qty=1, price=10)]),
+    "Y": Item([Offer(qty=1, price=10)]),
+    "Z": Item([Offer(qty=1, price=10)]),
+
 }
 
 
@@ -95,3 +116,4 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
