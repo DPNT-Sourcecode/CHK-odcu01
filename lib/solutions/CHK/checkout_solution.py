@@ -111,9 +111,10 @@ def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, 
         group_items_n = sum([qty for item, qty in counter.items() if item in promo.items])
         discount_n = floor(group_items_n / promo.qty)
 
+        remove_n = discount_n * promo.qty
         group_n = 0
         for item in promo.items:
-            if group_n != discount_n:
+            if group_n != remove_n:
                 while counter[item] > 0:
                     counter[item] -= 1
                     group_n += 1
@@ -149,12 +150,3 @@ def checkout(skus: str) -> int:
     apply_group_promotions(GROUP_PROMOTIONS, counter)
 
     return checkout_items(PRICE_TABLE, counter)
-
-
-
-
-
-
-
-
-

@@ -60,20 +60,14 @@ class TestInterItemPromotions:
 
 class TestGroupPromotions:
     def test_group_promotions(self):
-        price_table: Dict[str, Item] = {
-            "a": Item([Offer(qty=1, price=20)]),
-            "b": Item([Offer(qty=1, price=21)]),
-            "c": Item([Offer(qty=1, price=15)]),
-            "d": Item([Offer(qty=1, price=16)]),
-        }
         promotions = [
-            GroupPromotion(items=["b", "d", "c"], qty=4)
+            GroupPromotion(items=["b", "d", "c"], qty=4, price=12)
         ]
 
         counter: Dict[str, int] = {"a": 2, "b": 3, "c": 1, "d": 10}
         group_price = apply_group_promotions(promotions, counter)
 
-        assert group_price == (3 * 21 + 1 * 16) + (4 * 16) + (4 * 16)
+        assert group_price == 3 * 12
 
         assert len(counter) == 4
         assert counter["a"] == 2
@@ -119,7 +113,3 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
-
-
-
-
