@@ -25,7 +25,7 @@ class Item:
 
 PRICE_TABLE: Dict[str, Item] = {
     "A": Item(50, (3, 130)),
-    "B": Item(30, (2, 130)),
+    "B": Item(30, (2, 45)),
     "C": Item(20, (1, 20)),
     "D": Item(15, (1, 15)),
 }
@@ -40,7 +40,6 @@ def checkout_items(counter: Dict[str, int]) -> int:
     for sku, qty in counter.items():
         item = PRICE_TABLE[sku]
         price = item.checkout(qty)
-        from pprint import pprint; import ipdb; ipdb.set_trace()
         prices.append(price)
 
     return sum(prices)
@@ -69,4 +68,5 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
 
