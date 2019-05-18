@@ -114,18 +114,9 @@ def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, 
 
         to_remove_n = discount_n * promo.qty
         for item in promo.items:
-            print('\n-')
-            import pprint
-            pprint.pprint(f"checking item {item}")
-            print('-\n')
-            if to_remove_n > 0:
-                while counter[item] > 0:
-                    print('\n-')
-                    import pprint
-                    pprint.pprint(f"removing item {item}")
-                    print('-\n')
-                    counter[item] -= 1
-                    to_remove_n -= 1
+            while to_remove_n > 0 and counter[item] > 0:
+                counter[item] -= 1
+                to_remove_n -= 1
 
     return group_price
 
@@ -156,5 +147,6 @@ def checkout(skus: str) -> int:
     apply_group_promotions(GROUP_PROMOTIONS, counter)
 
     return checkout_items(PRICE_TABLE, counter)
+
 
 
