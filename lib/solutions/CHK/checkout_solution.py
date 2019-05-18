@@ -6,12 +6,14 @@ PriceQtyPairs = List[Tuple[int, int]]
 
 
 class Item:
-    def __init__(self, PriceQtyPairs) -> None:
-        pass
+    def __init__(self, price_qty_list: PriceQtyPairs) -> None:
+        self.price_qty_list = price_qty_list
 
     def checkout(self, qty: int) -> int:
-        regular_price_n = qty % self.special_offer_qty
-        discount_price_n = floor(qty / self.special_offer_qty)
+        price = 0
+        for price_qty in self.price_qty_list:
+            discount_price_n = floor(qty / self.special_offer_qty)
+            qty = qty % self.special_offer_qty
 
         return (self.price * regular_price_n) + \
                (self.special_offer_price * discount_price_n)
@@ -62,3 +64,4 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
