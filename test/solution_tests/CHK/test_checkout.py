@@ -58,10 +58,17 @@ class TestInterItemPromotions:
 
 class TestGroupPromotions:
     def test_group_promotions(self):
-        promotions = []
+        price_table: Dict[str, Item] = {
+            "a": Item([Offer(qty=1, price=20)]),
+            "b": Item([Offer(qty=1, price=21)]),
+            "c": Item([Offer(qty=1, price=19)]),
+            "d": Item([Offer(qty=1, price=15)]),
+        }
+        promotions = [
 
-        counter: Dict[str, int] = {"A": 5, "B": 3, "C": 1, "D": 10, "E": 1, "F": 0, "G": 3}
-        
+        ]
+
+    counter: Dict[str, int] = {"A": 2, "B": 3, "C": 1, "D": 10, "E": 1, "F": 0, "G": 3}
 
 
 class TestCheckout:
@@ -101,4 +108,5 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 

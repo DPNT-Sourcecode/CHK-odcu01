@@ -69,8 +69,9 @@ INTER_ITEM_PROMOTIONS: List[InterItemPromotion] = [
 ]
 
 
-class GroupPromotion:
-    pass
+class GroupPromotion(NamedTuple):
+    items: List[str]
+    qty: int
 
 
 class SkuNotFoundException(Exception):
@@ -98,6 +99,9 @@ def apply_inter_item_promotions(
             counter[promo.dest_item] = 0
 
 
+def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, int])
+    pass
+
 def checkout_items(counter: Dict[str, int]) -> int:
     prices = []
     for sku, qty in counter.items():
@@ -122,5 +126,6 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
 
 
