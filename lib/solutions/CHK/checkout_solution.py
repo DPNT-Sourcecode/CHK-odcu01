@@ -21,11 +21,6 @@ class Item:
         return price
 
 
-class InterItemPromotion(NamedTuple):
-    
-
-
-
 PRICE_TABLE: Dict[str, Item] = {
     "A": Item([Offer(qty=5, price=200), Offer(qty=3, price=130), Offer(qty=1, price=50)]),
     "B": Item([Offer(qty=2, price=45), Offer(qty=1, price=30)]),
@@ -33,6 +28,18 @@ PRICE_TABLE: Dict[str, Item] = {
     "D": Item([Offer(qty=1, price=15)]),
     "E": Item([Offer(qty=1, price=40)]),
 }
+
+
+class InterItemPromotion(NamedTuple):
+    src_item: str
+    src_qty: int
+    dest_item: str
+    dest_qty: int
+
+
+INTER_ITEM_PROMOTIONS: List[InterItemPromotion] = [
+    InterItemPromotion(src_item="E", src_qty=2, dest_item="B", dest_qty=-1)
+]
 
 
 class SkuNotFoundException(Exception):
@@ -72,6 +79,7 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
 
 
 
