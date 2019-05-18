@@ -1,3 +1,4 @@
+from typing import Dict
 from lib.solutions.CHK.checkout_solution import (
     InterItemPromotion,
     Item,
@@ -8,21 +9,21 @@ from lib.solutions.CHK.checkout_solution import (
 
 
 class TestItem:
-    def test_item_checkout_simple_item(self):
+    def test_item_checkout_simple_item(self) -> None:
         item = Item([Offer(qty=1, price=10)])
 
         assert item.checkout(1) == 10
         assert item.checkout(2) == 20
         assert item.checkout(3) == 30
 
-    def test_item_checkout_single_discount(self):
+    def test_item_checkout_single_discount(self) -> None:
         item = Item([Offer(qty=2, price=15), Offer(qty=1, price=10)])
 
         assert item.checkout(1) == 10
         assert item.checkout(2) == 15
         assert item.checkout(3) == 25
 
-    def test_item_checkout_multi_discount(self):
+    def test_item_checkout_multi_discount(self) -> None:
         item = Item(
             [Offer(qty=3, price=12), Offer(qty=2, price=15), Offer(qty=1, price=10)]
         )
@@ -36,23 +37,36 @@ class TestItem:
 
 
 class TestInterItemPromotions:
-    def test_inter_promotions(self):
-        InterItemPromotion(src_item="A", src_qty=2, dest_item="B", dest_qty=-1)
-        apply_inter_item_promotions
+    def test_inter_promotions(self) -> None:
+        promotions = [
+            InterItemPromotion(src_item="A", src_qty=2, dest_item="B", dest_qty=-1),
+            InterItemPromotion(src_item="C", src_qty=1, dest_item="D", dest_qty=-1)
+        ]
+
+        counter: Dict[str, int] = {
+            "A": 5, "B": 3, "C": 1, "D": 10
+        }
+        apply_inter_item_promotions(promotions, counter)
+
+        assert len(counter) == 4
+        assert counter["A"] == 5
+        assert counter["B"] == 1
+        assert counter["C"] == 1
+        assert counter["D"] == 9
 
 
 class TestCheckout:
-    def test_checkout_error(self):
+    def test_checkout_error(self) -> None:
         invalid_inputs = (None, ["A"], 1, {"A": "A"}, "X", "ABCDX")
 
         for input_ in invalid_inputs:
             assert checkout(input_) == -1
 
-    def test_checkout_no_error(self):
+    def test_checkout_no_error(self) -> None:
         input_ = "ABCDE"
         assert checkout(input_) > 0
 
-    def test_checkout_ok(self):
+    def test_checkout_ok(self) -> None:
         in_out = {
             "": 0,
             "A": 50,
@@ -69,6 +83,7 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 
 
 
