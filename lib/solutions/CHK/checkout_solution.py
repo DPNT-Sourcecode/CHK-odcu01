@@ -1,9 +1,12 @@
-from typing import Dict, Tuple
+from typing import Dict, List, Tuple
 from math import floor
 
 
+SpecialPriceType = List[Tuple[int, int]]
+
+
 class Item:
-    def __init__(self, price: int, special_offer: Tuple[int, int]) -> None:
+    def __init__(self, price: int, special_offer: SpecialPriceType) -> None:
         self.price = price
         self._special_offer = special_offer
 
@@ -68,5 +71,6 @@ def checkout(skus: str) -> int:
         return -1
 
     return checkout_items(counter)
+
 
 
