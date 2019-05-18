@@ -1,11 +1,14 @@
 from typing import Dict
 
-from lib.solutions.CHK.checkout_solution import (InterItemPromotion, Item,
-                                                 Offer,
-                                                 apply_inter_item_promotions,
-                                                 checkout,
-                                                 GroupPromotion,
-                                                 apply_group_promotions)
+from lib.solutions.CHK.checkout_solution import (
+    InterItemPromotion,
+    Item,
+    Offer,
+    apply_inter_item_promotions,
+    checkout,
+    GroupPromotion,
+    apply_group_promotions,
+)
 
 
 class TestItem:
@@ -45,7 +48,15 @@ class TestInterItemPromotions:
             InterItemPromotion(src_item="G", src_qty=3, dest_item="G", dest_qty=-1),
         ]
 
-        counter: Dict[str, int] = {"A": 5, "B": 3, "C": 1, "D": 10, "E": 1, "F": 0, "G": 3}
+        counter: Dict[str, int] = {
+            "A": 5,
+            "B": 3,
+            "C": 1,
+            "D": 10,
+            "E": 1,
+            "F": 0,
+            "G": 3,
+        }
         apply_inter_item_promotions(promotions, counter)
 
         assert len(counter) == 7
@@ -60,9 +71,7 @@ class TestInterItemPromotions:
 
 class TestGroupPromotions:
     def test_group_promotions(self):
-        promotions = [
-            GroupPromotion(items=["b", "d", "c"], qty=4, price=12)
-        ]
+        promotions = [GroupPromotion(items=["b", "d", "c"], qty=4, price=12)]
 
         counter: Dict[str, int] = {"a": 2, "b": 3, "c": 1, "d": 10}
         group_price = apply_group_promotions(promotions, counter)
@@ -109,9 +118,14 @@ class TestCheckout:
             "F": 10,
             "FF": 20,
             "FFF": 20,
-            ""
+            "STS": 45,
+            "STST": 65,
+            "XYZ": 45,
+            "XXY": 45,
+            "ZZXX": 62,
         }
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 

@@ -31,7 +31,9 @@ PRICE_TABLE: Dict[str, Item] = {
     "E": Item([Offer(qty=1, price=40)]),
     "F": Item([Offer(qty=1, price=10)]),
     "G": Item([Offer(qty=1, price=20)]),
-    "H": Item([Offer(qty=10, price=80), Offer(qty=5, price=45), Offer(qty=1, price=10)]),
+    "H": Item(
+        [Offer(qty=10, price=80), Offer(qty=5, price=45), Offer(qty=1, price=10)]
+    ),
     "I": Item([Offer(qty=1, price=35)]),
     "J": Item([Offer(qty=1, price=60)]),
     "K": Item([Offer(qty=2, price=120), Offer(qty=1, price=70)]),
@@ -45,7 +47,9 @@ PRICE_TABLE: Dict[str, Item] = {
     "S": Item([Offer(qty=1, price=20)]),
     "T": Item([Offer(qty=1, price=20)]),
     "U": Item([Offer(qty=1, price=40)]),
-    "V": Item([Offer(qty=3, price=130), Offer(qty=2, price=90), Offer(qty=1, price=50)]),
+    "V": Item(
+        [Offer(qty=3, price=130), Offer(qty=2, price=90), Offer(qty=1, price=50)]
+    ),
     "W": Item([Offer(qty=1, price=20)]),
     "X": Item([Offer(qty=1, price=17)]),
     "Y": Item([Offer(qty=1, price=20)]),
@@ -76,7 +80,7 @@ class GroupPromotion(NamedTuple):
 
 
 GROUP_PROMOTIONS: List[GroupPromotion] = [
-
+    GroupPromotion(items=["Z", "Y", "S", "T", "X"], qty=3, price=45)
 ]
 
 
@@ -96,7 +100,7 @@ def count_items(skus: str) -> Dict[str, int]:
 
 
 def apply_inter_item_promotions(
-        promotions: List[InterItemPromotion], counter: Dict[str, int]
+    promotions: List[InterItemPromotion], counter: Dict[str, int]
 ) -> None:
     for promo in promotions:
         n = floor(counter[promo.src_item] / promo.src_qty)
@@ -105,10 +109,14 @@ def apply_inter_item_promotions(
             counter[promo.dest_item] = 0
 
 
-def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, int]) -> int:
+def apply_group_promotions(
+    promotions: List[GroupPromotion], counter: Dict[str, int]
+) -> int:
     group_price = 0
     for promo in promotions:
-        group_items_n = sum([qty for item, qty in counter.items() if item in promo.items])
+        group_items_n = sum(
+            [qty for item, qty in counter.items() if item in promo.items]
+        )
         discount_n = floor(group_items_n / promo.qty)
         group_price += discount_n * promo.price
 
@@ -144,9 +152,10 @@ def checkout(skus: str) -> int:
 
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
-    apply_group_promotions(GROUP_PROMOTIONS, counter)
+    group_price = apply_group_promotions(GROUP_PROMOTIONS, counter)
+    items_price = checkout_items(PRICE_TABLE, counter)
+    return group_price + items_price
 
-    return checkout_items(PRICE_TABLE, counter)
 
 
 
