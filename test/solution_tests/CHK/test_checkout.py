@@ -4,7 +4,7 @@ from lib.solutions.CHK.checkout_solution import checkout
 class TestCheckout:
     def test_checkout_error(self):
         invalid_inputs = (
-            None, ["A"], 1, {"A": "A"}, "E"
+            None, ["A"], 1, {"A": "A"}, "E", "ABCDE",
         )
 
         for input_ in invalid_inputs:
@@ -23,6 +23,3 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output
-
-
-

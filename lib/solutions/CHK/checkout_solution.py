@@ -17,8 +17,12 @@ PRICE_TABLE = {
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-def checkout(skus):
-    pass
+def checkout(skus: str) -> int:
+    if not isinstance(skus, str):
+        return -1
 
-
-
+    counter = {}
+    for sku in skus:
+        if sku not in PRICE_TABLE:
+            return -1
+        counter[sku] += 1
