@@ -72,7 +72,14 @@ class TestGroupPromotions:
 
         counter: Dict[str, int] = {"a": 2, "b": 3, "c": 1, "d": 10}
         group_price = apply_group_promotions(promotions, counter)
-        assert group_price == (3 * 21 + 1 * 16) +
+
+        assert group_price == (3 * 21 + 1 * 16) + (4 * 16) + (4 * 16)
+
+        assert len(counter) == 4
+        assert counter["a"] == 2
+        assert counter["b"] == 0
+        assert counter["c"] == 1
+        assert counter["d"] == 1
 
 
 class TestCheckout:
@@ -112,6 +119,7 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 
 
 
