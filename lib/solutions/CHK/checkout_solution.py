@@ -15,14 +15,21 @@ PRICE_TABLE = {
 }
 
 
+def checkout_items(counter: dict) -> int:
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
     if not isinstance(skus, str):
         return -1
 
-    counter = {}
+    counter = {sku: 0 for sku, _ in PRICE_TABLE.items()}
+
     for sku in skus:
-        if sku not in PRICE_TABLE:
+        if sku not in counter:
             return -1
         counter[sku] += 1
+
+
+
