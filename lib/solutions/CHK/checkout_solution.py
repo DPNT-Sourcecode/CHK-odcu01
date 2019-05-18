@@ -70,7 +70,7 @@ INTER_ITEM_PROMOTIONS: List[InterItemPromotion] = [
 
 
 class GroupPromotion(NamedTuple):
-    items: List[str]
+    items: List[str]  # register item from the most expensive to the least expensive
     qty: int
 
 
@@ -103,7 +103,12 @@ def apply_group_promotions(promotions: List[GroupPromotion], counter: Dict[str, 
     for promo in promotions:
         group_items_n = sum([qty for item, qty in counter.items() if item in promo.items])
         discount_n = floor(group_items_n / promo.qty)
-        
+
+        group_price = 0
+        group_n = 0
+        for item in promo.items:
+
+
 
 
 def checkout_items(price_table: Dict[str, Item], counter: Dict[str, int]) -> int:
@@ -130,6 +135,7 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(PRICE_TABLE, counter)
+
 
 
 
