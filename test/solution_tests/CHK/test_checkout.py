@@ -1,4 +1,10 @@
-from lib.solutions.CHK.checkout_solution import checkout, Item, Offer
+from lib.solutions.CHK.checkout_solution import (
+    InterItemPromotion,
+    Item,
+    Offer,
+    apply_inter_item_promotions,
+    checkout,
+)
 
 
 class TestItem:
@@ -10,17 +16,16 @@ class TestItem:
         assert item.checkout(3) == 30
 
     def test_item_checkout_single_discount(self):
-        item = Item([Offer(qty=2, price=15),
-                     Offer(qty=1, price=10)])
+        item = Item([Offer(qty=2, price=15), Offer(qty=1, price=10)])
 
         assert item.checkout(1) == 10
         assert item.checkout(2) == 15
         assert item.checkout(3) == 25
 
     def test_item_checkout_multi_discount(self):
-        item = Item([Offer(qty=3, price=12),
-                     Offer(qty=2, price=15),
-                     Offer(qty=1, price=10)])
+        item = Item(
+            [Offer(qty=3, price=12), Offer(qty=2, price=15), Offer(qty=1, price=10)]
+        )
 
         assert item.checkout(1) == 10
         assert item.checkout(2) == 15
@@ -32,14 +37,13 @@ class TestItem:
 
 class TestInterItemPromotions:
     def test_inter_promotions(self):
+        InterItemPromotion(src_item="A", src_qty=2, dest_item="B", dest_qty=-1)
         apply_inter_item_promotions
 
 
 class TestCheckout:
     def test_checkout_error(self):
-        invalid_inputs = (
-            None, ["A"], 1, {"A": "A"}, "X", "ABCDX",
-        )
+        invalid_inputs = (None, ["A"], 1, {"A": "A"}, "X", "ABCDX")
 
         for input_ in invalid_inputs:
             assert checkout(input_) == -1
@@ -49,17 +53,23 @@ class TestCheckout:
         assert checkout(input_) > 0
 
     def test_checkout_ok(self):
-            in_out = {
-                "": 0,
-                "A": 50, "AB": 80, "C": 20,
-                "AAA": 130, "AAAA": 180, "AAAAA": 200, "AAAAAA": 250,
-                "CCCCC": 100,
-                "DABDBC": 145,
-                # "BE": 70, "BEE": 80, "BBEE": 110, "BBBEE": 125, "BBBEEE": 165, "BBBEEEE": 190
-            }
+        in_out = {
+            "": 0,
+            "A": 50,
+            "AB": 80,
+            "C": 20,
+            "AAA": 130,
+            "AAAA": 180,
+            "AAAAA": 200,
+            "AAAAAA": 250,
+            "CCCCC": 100,
+            "DABDBC": 145,
+            # "BE": 70, "BEE": 80, "BBEE": 110, "BBBEE": 125, "BBBEEE": 165, "BBBEEEE": 190
+        }
 
-            for input_, output in in_out.items():
-                assert checkout(input_) == output, input_
+        for input_, output in in_out.items():
+            assert checkout(input_) == output, input_
+
 
 
 

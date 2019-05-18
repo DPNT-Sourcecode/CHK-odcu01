@@ -57,8 +57,8 @@ def count_items(skus: str) -> Dict[str, int]:
     return counter
 
 
-def apply_inter_item_promotions(counter: Dict[str, int]) -> None:
-    for promotion in INTER_ITEM_PROMOTIONS:
+def apply_inter_item_promotions(promotions: List[InterItemPromotion], counter: Dict[str, int]) -> None:
+    for promotion in promotions:
         pass
 
 
@@ -83,9 +83,10 @@ def checkout(skus: str) -> int:
     except SkuNotFoundException:
         return -1
 
-    apply_inter_item_promotions(counter)
+    apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
 
 
 
