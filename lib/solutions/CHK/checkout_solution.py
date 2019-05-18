@@ -65,6 +65,8 @@ def apply_inter_item_promotions(
     for promo in promotions:
         n = floor(counter[promo.src_item] / promo.src_qty)
         counter[promo.dest_item] += promo.dest_qty * n
+        if counter[promo.dest_item] < 0:
+            counter[promo.dest_item] = 0
 
 
 def checkout_items(counter: Dict[str, int]) -> int:
@@ -91,4 +93,5 @@ def checkout(skus: str) -> int:
     apply_inter_item_promotions(INTER_ITEM_PROMOTIONS, counter)
 
     return checkout_items(counter)
+
 

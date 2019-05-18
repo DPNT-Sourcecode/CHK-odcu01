@@ -76,6 +76,7 @@ class TestCheckout:
             "AAAAA": 200,
             "AAAAAA": 250,
             "CCCCC": 100,
+            "EE": 80,
             "DABDBC": 145,
             "BE": 70,
             "BEE": 80,
@@ -87,5 +88,6 @@ class TestCheckout:
 
         for input_, output in in_out.items():
             assert checkout(input_) == output, input_
+
 
 
